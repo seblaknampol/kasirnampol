@@ -2,11 +2,286 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#c8102e"
+  >
+
   <title>KASIR NAMPOL</title>
+
+  <link
+    rel="stylesheet"
+    href="./app.css"
+  >
 </head>
+
 <body>
-  <h1>KASIR NAMPOL</h1>
-  <p>SEBLAK NAMPOL</p>
+
+  <!-- =====================================================
+       APP
+       ===================================================== -->
+
+  <div id="app">
+
+    <!-- ===================================================
+         AUTH
+         =================================================== -->
+
+    <section
+      id="auth-screen"
+      class="screen auth-screen"
+    >
+
+      <div class="auth-card">
+
+        <div class="brand">
+
+          <img
+            src="./assets/images/logo.png"
+            alt="SEBLAK NAMPOL"
+            class="brand-logo"
+          >
+
+          <div class="brand-text">
+
+            <h1>
+              KASIR NAMPOL
+            </h1>
+
+            <p>
+              Sistem Kasir SEBLAK NAMPOL
+            </p>
+
+          </div>
+
+        </div>
+
+        <!-- LOGIN -->
+
+        <form
+          id="login-form"
+          class="auth-form"
+        >
+
+          <div class="form-heading">
+
+            <span>
+              LOGIN KASIR
+            </span>
+
+            <h2>
+              Masuk ke KASIR NAMPOL
+            </h2>
+
+            <p>
+              Gunakan email dan password akun Kasir.
+            </p>
+
+          </div>
+
+          <label>
+            Email
+
+            <input
+              id="login-email"
+              type="email"
+              autocomplete="email"
+              placeholder="Email Kasir"
+              required
+            >
+          </label>
+
+          <label>
+            Password
+
+            <input
+              id="login-password"
+              type="password"
+              autocomplete="current-password"
+              placeholder="Password"
+              required
+            >
+          </label>
+
+          <button
+            type="submit"
+            class="btn-primary"
+          >
+            Masuk
+          </button>
+
+          <button
+            type="button"
+            id="forgot-password-btn"
+            class="btn-link"
+          >
+            Lupa Password?
+          </button>
+
+          <div
+            id="login-message"
+            class="auth-message"
+          ></div>
+
+        </form>
+
+        <!-- FORGOT PASSWORD -->
+
+        <form
+          id="forgot-form"
+          class="auth-form hidden"
+        >
+
+          <div class="form-heading">
+
+            <span>
+              PEMULIHAN AKUN
+            </span>
+
+            <h2>
+              Lupa Password
+            </h2>
+
+            <p>
+              Masukkan email Kasir untuk menerima link reset password.
+            </p>
+
+          </div>
+
+          <label>
+            Email
+
+            <input
+              id="forgot-email"
+              type="email"
+              autocomplete="email"
+              placeholder="Email Kasir"
+              required
+            >
+          </label>
+
+          <button
+            type="submit"
+            class="btn-primary"
+          >
+            Kirim Link Reset
+          </button>
+
+          <button
+            type="button"
+            id="back-login-btn"
+            class="btn-link"
+          >
+            Kembali ke Login
+          </button>
+
+          <div
+            id="forgot-message"
+            class="auth-message"
+          ></div>
+
+        </form>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         APP SCREEN
+         =================================================== -->
+
+    <section
+      id="app-screen"
+      class="screen app-screen hidden"
+    >
+
+      <header class="topbar">
+
+        <div class="topbar-brand">
+
+          <img
+            src="./assets/images/logo.png"
+            alt="SEBLAK NAMPOL"
+          >
+
+          <div>
+            <strong>
+              KASIR NAMPOL
+            </strong>
+
+            <span>
+              SEBLAK NAMPOL
+            </span>
+          </div>
+
+        </div>
+
+        <div class="topbar-user">
+
+          <span id="cashier-name">
+            Kasir
+          </span>
+
+          <button
+            type="button"
+            id="logout-btn"
+            class="btn-logout"
+          >
+            Keluar
+          </button>
+
+        </div>
+
+      </header>
+
+
+      <main
+        id="cashier-content"
+        class="cashier-content"
+      >
+
+        <section class="welcome-panel">
+
+          <span class="panel-kicker">
+            KASIR NAMPOL
+          </span>
+
+          <h1>
+            Selamat Datang
+          </h1>
+
+          <p>
+            Sistem kasir SEBLAK NAMPOL siap digunakan.
+          </p>
+
+        </section>
+
+      </main>
+
+
+      <footer class="app-footer">
+        SEBLAK NAMPOL • © 2026 • by Suwardi
+      </footer>
+
+    </section>
+
+  </div>
+
+
+  <!-- =====================================================
+       SUPABASE
+       ===================================================== -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="./app.js"></script>
+
 </body>
 </html>
