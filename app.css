@@ -1,0 +1,387 @@
+/* =========================================================
+   KASIR NAMPOL
+   GLOBAL
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+  background: #f5f5f5;
+  color: #171717;
+}
+
+body {
+  min-height: 100vh;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+/* =========================================================
+   AUTH SCREEN
+   ========================================================= */
+
+.auth-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  background:
+    linear-gradient(
+      135deg,
+      #c8102e 0%,
+      #a80d26 55%,
+      #7f0a1d 100%
+    );
+}
+
+.auth-card {
+  width: min(460px, 100%);
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 32px;
+  box-shadow:
+    0 24px 60px
+    rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.brand-logo {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  flex: 0 0 72px;
+}
+
+.brand-text h1 {
+  margin: 0;
+  color: #c8102e;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.brand-text p {
+  margin: 5px 0 0;
+  color: #666666;
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.form-heading {
+  margin-bottom: 22px;
+}
+
+.form-heading span {
+  display: inline-block;
+  margin-bottom: 7px;
+  color: #c8102e;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.form-heading h2 {
+  margin: 0;
+  font-size: 25px;
+  line-height: 1.2;
+}
+
+.form-heading p {
+  margin: 8px 0 0;
+  color: #666666;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.auth-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  color: #222222;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.auth-form input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid #d5d5d5;
+  border-radius: 10px;
+  outline: none;
+  background: #ffffff;
+  color: #171717;
+}
+
+.auth-form input:focus {
+  border-color: #c8102e;
+  box-shadow:
+    0 0 0 3px
+    rgba(200, 16, 46, 0.12);
+}
+
+
+/* =========================================================
+   BUTTON
+   ========================================================= */
+
+.btn-primary {
+  width: 100%;
+  min-height: 50px;
+  border: 0;
+  border-radius: 10px;
+  background: #c8102e;
+  color: #ffffff;
+  font-weight: 800;
+  transition: 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: #a80d26;
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.btn-link {
+  border: 0;
+  background: transparent;
+  color: #c8102e;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.btn-link:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   MESSAGE
+   ========================================================= */
+
+.auth-message {
+  min-height: 20px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.auth-message.error {
+  color: #b00020;
+}
+
+.auth-message.success {
+  color: #087f23;
+}
+
+
+/* =========================================================
+   APP SCREEN
+   ========================================================= */
+
+.app-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f3f3f3;
+}
+
+
+/* =========================================================
+   TOPBAR
+   ========================================================= */
+
+.topbar {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 12px 28px;
+  background: #c8102e;
+  color: #ffffff;
+  box-shadow:
+    0 4px 14px
+    rgba(0, 0, 0, 0.16);
+}
+
+.topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topbar-brand img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.topbar-brand strong {
+  display: block;
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.topbar-brand span {
+  display: block;
+  margin-top: 3px;
+  font-size: 11px;
+  opacity: 0.85;
+}
+
+.topbar-user {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.btn-logout {
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid
+    rgba(255, 255, 255, 0.5);
+  border-radius: 9px;
+  background: #ffffff;
+  color: #c8102e;
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.cashier-content {
+  flex: 1;
+  padding: 28px;
+}
+
+.welcome-panel {
+  padding: 30px;
+  border-radius: 18px;
+  background: #ffffff;
+  border-left: 7px solid #c8102e;
+  box-shadow:
+    0 8px 24px
+    rgba(0, 0, 0, 0.07);
+}
+
+.panel-kicker {
+  color: #c8102e;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.welcome-panel h1 {
+  margin: 8px 0 5px;
+  font-size: 30px;
+}
+
+.welcome-panel p {
+  margin: 0;
+  color: #666666;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.app-footer {
+  padding: 14px 28px;
+  background: #171717;
+  color: #ffffff;
+  text-align: center;
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .auth-screen {
+    padding: 18px;
+  }
+
+  .auth-card {
+    padding: 24px 20px;
+    border-radius: 18px;
+  }
+
+  .topbar {
+    padding: 10px 16px;
+  }
+
+  .topbar-user {
+    gap: 8px;
+  }
+
+  .topbar-user span {
+    display: none;
+  }
+
+  .cashier-content {
+    padding: 16px;
+  }
+
+  .welcome-panel {
+    padding: 22px;
+  }
+
+  .welcome-panel h1 {
+    font-size: 24px;
+  }
+
+}
