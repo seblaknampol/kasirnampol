@@ -1,8 +1,7 @@
 'use strict';
 
 /* =========================================================
-   KASIR NAMPOL
-   APP
+   SUPABASE
    ========================================================= */
 
 const SUPABASE_URL =
@@ -11,10 +10,8 @@ const SUPABASE_URL =
 const SUPABASE_ANON_KEY =
   'sb_publishable_3kLizOd7Mb-P5en0I_0TMA_gkWF37u4';
 
-
-/* =========================================================
-   SUPABASE CLIENT
-   ========================================================= */
+const KASIR_URL =
+  'https://seblaknampol.github.io/kasirnampol/';
 
 const supabaseClient =
   window.supabase.createClient(
@@ -24,7 +21,7 @@ const supabaseClient =
 
 
 /* =========================================================
-   DOM
+   ELEMENT
    ========================================================= */
 
 const authScreen =
@@ -47,6 +44,11 @@ const forgotForm =
     'forgot-form'
   );
 
+const updatePasswordForm =
+  document.getElementById(
+    'update-password-form'
+  );
+
 const loginEmail =
   document.getElementById(
     'login-email'
@@ -62,6 +64,16 @@ const forgotEmail =
     'forgot-email'
   );
 
+const newPassword =
+  document.getElementById(
+    'new-password'
+  );
+
+const confirmPassword =
+  document.getElementById(
+    'confirm-password'
+  );
+
 const loginMessage =
   document.getElementById(
     'login-message'
@@ -70,6 +82,11 @@ const loginMessage =
 const forgotMessage =
   document.getElementById(
     'forgot-message'
+  );
+
+const updatePasswordMessage =
+  document.getElementById(
+    'update-password-message'
   );
 
 const cashierName =
@@ -94,7 +111,7 @@ const backLoginBtn =
 
 
 /* =========================================================
-   HELPERS
+   MESSAGE
    ========================================================= */
 
 function showMessage(
@@ -102,6 +119,7 @@ function showMessage(
   message,
   type = ''
 ) {
+
   if (!element) {
     return;
   }
@@ -118,12 +136,31 @@ function showMessage(
 }
 
 
-function showLogin() {
-  loginForm.classList.remove(
+/* =========================================================
+   AUTH FORMS
+   ========================================================= */
+
+function hideAllAuthForms() {
+
+  loginForm?.classList.add(
     'hidden'
   );
 
-  forgotForm.classList.add(
+  forgotForm?.classList.add(
+    'hidden'
+  );
+
+  updatePasswordForm?.classList.add(
+    'hidden'
+  );
+}
+
+
+function showLogin() {
+
+  hideAllAuthForms();
+
+  loginForm?.classList.remove(
     'hidden'
   );
 
@@ -131,15 +168,19 @@ function showLogin() {
     forgotMessage,
     ''
   );
+
+  showMessage(
+    updatePasswordMessage,
+    ''
+  );
 }
 
 
 function showForgotPassword() {
-  loginForm.classList.add(
-    'hidden'
-  );
 
-  forgotForm.classList.remove(
+  hideAllAuthForms();
+
+  forgotForm?.classList.remove(
     'hidden'
   );
 
@@ -153,23 +194,54 @@ function showForgotPassword() {
 }
 
 
-function showApp() {
-  authScreen.classList.add(
+function showUpdatePassword() {
+
+  hideAllAuthForms();
+
+  updatePasswordForm?.classList.remove(
     'hidden'
   );
 
-  appScreen.classList.remove(
+  showMessage(
+    loginMessage,
+    ''
+  );
+
+  showMessage(
+    forgotMessage,
+    ''
+  );
+
+  showMessage(
+    updatePasswordMessage,
+    ''
+  );
+}
+
+
+/* =========================================================
+   APP SCREEN
+   ========================================================= */
+
+function showApp() {
+
+  authScreen?.classList.add(
+    'hidden'
+  );
+
+  appScreen?.classList.remove(
     'hidden'
   );
 }
 
 
 function showAuth() {
-  appScreen.classList.add(
+
+  appScreen?.classList.add(
     'hidden'
   );
 
-  authScreen.classList.remove(
+  authScreen?.classList.remove(
     'hidden'
   );
 }
@@ -182,8 +254,9 @@ function showAuth() {
 async function loadCashierProfile(
   user
 ) {
+
   if (!user) {
-    return;
+    return false;
   }
 
   const {
@@ -202,18 +275,22 @@ async function loadCashierProfile(
       .maybeSingle();
 
   if (error) {
+
     console.error(
       'Gagal mengambil profil Kasir:',
       error
     );
 
-    return;
+    return false;
   }
 
   if (!data) {
+
     await supabaseClient.auth.signOut();
 
     showAuth();
+
+    showLogin();
 
     showMessage(
       loginMessage,
@@ -221,15 +298,19 @@ async function loadCashierProfile(
       'error'
     );
 
-    return;
+    return false;
   }
 
   if (
-    data.role !== 'cashier'
+    data.role !==
+    'cashier'
   ) {
+
     await supabaseClient.auth.signOut();
 
     showAuth();
+
+    showLogin();
 
     showMessage(
       loginMessage,
@@ -237,15 +318,19 @@ async function loadCashierProfile(
       'error'
     );
 
-    return;
+    return false;
   }
 
   if (
-    data.status !== 'active'
+    data.status !==
+    'active'
   ) {
+
     await supabaseClient.auth.signOut();
 
     showAuth();
+
+    showLogin();
 
     showMessage(
       loginMessage,
@@ -253,13 +338,18 @@ async function loadCashierProfile(
       'error'
     );
 
-    return;
+    return false;
   }
 
-  cashierName.textContent =
-    data.full_name ||
-    user.email ||
-    'Kasir';
+  if (cashierName) {
+
+    cashierName.textContent =
+      data.full_name ||
+      user.email ||
+      'Kasir';
+  }
+
+  return true;
 }
 
 
@@ -267,7 +357,7 @@ async function loadCashierProfile(
    LOGIN
    ========================================================= */
 
-loginForm.addEventListener(
+loginForm?.addEventListener(
   'submit',
   async (event) => {
 
@@ -290,6 +380,7 @@ loginForm.addEventListener(
       !email ||
       !password
     ) {
+
       showMessage(
         loginMessage,
         'Email dan password wajib diisi.',
@@ -327,6 +418,7 @@ loginForm.addEventListener(
       'Masuk';
 
     if (error) {
+
       console.error(
         'Login error:',
         error
@@ -342,21 +434,16 @@ loginForm.addEventListener(
       return;
     }
 
-    await loadCashierProfile(
-      data.user
-    );
+    const valid =
+      await loadCashierProfile(
+        data.user
+      );
 
-    const {
-      data: sessionData
-    } =
-      await supabaseClient.auth
-        .getSession();
-
-    if (
-      sessionData?.session
-    ) {
-      showApp();
+    if (!valid) {
+      return;
     }
+
+    showApp();
   }
 );
 
@@ -365,7 +452,7 @@ loginForm.addEventListener(
    FORGOT PASSWORD
    ========================================================= */
 
-forgotForm.addEventListener(
+forgotForm?.addEventListener(
   'submit',
   async (event) => {
 
@@ -382,6 +469,7 @@ forgotForm.addEventListener(
         .toLowerCase();
 
     if (!email) {
+
       showMessage(
         forgotMessage,
         'Email wajib diisi.',
@@ -410,7 +498,7 @@ forgotForm.addEventListener(
           email,
           {
             redirectTo:
-              'https://seblaknampol.github.io/kasirnampol/'
+              KASIR_URL
           }
         );
 
@@ -421,6 +509,7 @@ forgotForm.addEventListener(
       'Kirim Link Reset';
 
     if (error) {
+
       console.error(
         'Reset password error:',
         error
@@ -446,15 +535,153 @@ forgotForm.addEventListener(
 
 
 /* =========================================================
-   NAVIGATION AUTH
+   UPDATE PASSWORD
    ========================================================= */
 
-forgotPasswordBtn.addEventListener(
+updatePasswordForm?.addEventListener(
+  'submit',
+  async (event) => {
+
+    event.preventDefault();
+
+    showMessage(
+      updatePasswordMessage,
+      ''
+    );
+
+    const password =
+      newPassword.value;
+
+    const confirmation =
+      confirmPassword.value;
+
+    if (
+      !password ||
+      !confirmation
+    ) {
+
+      showMessage(
+        updatePasswordMessage,
+        'Password wajib diisi.',
+        'error'
+      );
+
+      return;
+    }
+
+    if (
+      password.length < 6
+    ) {
+
+      showMessage(
+        updatePasswordMessage,
+        'Password minimal 6 karakter.',
+        'error'
+      );
+
+      return;
+    }
+
+    if (
+      password !== confirmation
+    ) {
+
+      showMessage(
+        updatePasswordMessage,
+        'Konfirmasi password tidak sama.',
+        'error'
+      );
+
+      return;
+    }
+
+    const submitButton =
+      updatePasswordForm.querySelector(
+        'button[type="submit"]'
+      );
+
+    submitButton.disabled =
+      true;
+
+    submitButton.textContent =
+      'Menyimpan...';
+
+    const {
+      error
+    } =
+      await supabaseClient.auth
+        .updateUser({
+          password
+        });
+
+    submitButton.disabled =
+      false;
+
+    submitButton.textContent =
+      'Simpan Password';
+
+    if (error) {
+
+      console.error(
+        'Update password error:',
+        error
+      );
+
+      showMessage(
+        updatePasswordMessage,
+        error.message ||
+          'Gagal menyimpan password.',
+        'error'
+      );
+
+      return;
+    }
+
+    showMessage(
+      updatePasswordMessage,
+      'Password berhasil dibuat. Silakan masuk dengan password baru.',
+      'success'
+    );
+
+    newPassword.value =
+      '';
+
+    confirmPassword.value =
+      '';
+
+    setTimeout(
+      async () => {
+
+        await supabaseClient.auth
+          .signOut();
+
+        showAuth();
+
+        showLogin();
+
+        loginEmail.value =
+          '';
+
+        loginPassword.value =
+          '';
+
+      },
+      1200
+    );
+  }
+);
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+forgotPasswordBtn?.addEventListener(
   'click',
   showForgotPassword
 );
 
-backLoginBtn.addEventListener(
+backLoginBtn?.addEventListener(
   'click',
   showLogin
 );
@@ -464,7 +691,7 @@ backLoginBtn.addEventListener(
    LOGOUT
    ========================================================= */
 
-logoutBtn.addEventListener(
+logoutBtn?.addEventListener(
   'click',
   async () => {
 
@@ -481,12 +708,92 @@ logoutBtn.addEventListener(
       '';
 
     showAuth();
+
+    showLogin();
   }
 );
 
 
 /* =========================================================
-   SESSION CHECK
+   PASSWORD RECOVERY / INVITATION
+   ========================================================= */
+
+let recoveryDetected =
+  false;
+
+supabaseClient.auth.onAuthStateChange(
+  async (event, session) => {
+
+    console.log(
+      'Auth event:',
+      event
+    );
+
+    /*
+     * Link reset password akan
+     * menghasilkan event PASSWORD_RECOVERY.
+     */
+    if (
+      event ===
+      'PASSWORD_RECOVERY'
+    ) {
+
+      recoveryDetected =
+        true;
+
+      showAuth();
+
+      showUpdatePassword();
+
+      return;
+    }
+
+    if (
+      event ===
+      'SIGNED_OUT'
+    ) {
+
+      if (!recoveryDetected) {
+        showAuth();
+        showLogin();
+      }
+
+      return;
+    }
+
+    /*
+     * Login normal.
+     */
+    if (
+      event ===
+        'SIGNED_IN' &&
+      session?.user
+    ) {
+
+      /*
+       * Jangan langsung masuk
+       * aplikasi apabila sedang
+       * dalam proses recovery.
+       */
+      if (recoveryDetected) {
+        return;
+      }
+
+      const valid =
+        await loadCashierProfile(
+          session.user
+        );
+
+      if (valid) {
+        showApp();
+      }
+    }
+  }
+);
+
+
+/* =========================================================
+   CHECK SESSION
    ========================================================= */
 
 async function checkSession() {
@@ -499,12 +806,15 @@ async function checkSession() {
       .getSession();
 
   if (error) {
+
     console.error(
       'Session error:',
       error
     );
 
     showAuth();
+
+    showLogin();
 
     return;
   }
@@ -513,58 +823,32 @@ async function checkSession() {
     data?.session;
 
   if (!session?.user) {
+
     showAuth();
+
+    showLogin();
 
     return;
   }
 
-  await loadCashierProfile(
-    session.user
-  );
+  /*
+   * Jika event recovery sudah
+   * terdeteksi, jangan masuk
+   * dashboard.
+   */
+  if (recoveryDetected) {
+    return;
+  }
 
-  const {
-    data: verified
-  } =
-    await supabaseClient.auth
-      .getSession();
+  const valid =
+    await loadCashierProfile(
+      session.user
+    );
 
-  if (
-    verified?.session
-  ) {
+  if (valid) {
     showApp();
   }
 }
-
-
-/* =========================================================
-   AUTH STATE
-   ========================================================= */
-
-supabaseClient.auth.onAuthStateChange(
-  async (
-    event,
-    session
-  ) => {
-
-    if (
-      event === 'SIGNED_OUT'
-    ) {
-      showAuth();
-
-      return;
-    }
-
-    if (
-      session?.user
-    ) {
-      await loadCashierProfile(
-        session.user
-      );
-
-      showApp();
-    }
-  }
-);
 
 
 /* =========================================================
