@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -19,7 +21,9 @@
     rel="stylesheet"
     href="./app.css"
   >
+
 </head>
+
 
 <body>
 
@@ -28,6 +32,7 @@
        ===================================================== -->
 
   <div id="app">
+
 
     <!-- ===================================================
          AUTH
@@ -39,6 +44,11 @@
     >
 
       <div class="auth-card">
+
+
+        <!-- =================================================
+             BRAND
+             ================================================= -->
 
         <div class="brand">
 
@@ -62,7 +72,10 @@
 
         </div>
 
-        <!-- LOGIN -->
+
+        <!-- =================================================
+             LOGIN
+             ================================================= -->
 
         <form
           id="login-form"
@@ -85,7 +98,9 @@
 
           </div>
 
+
           <label>
+
             Email
 
             <input
@@ -95,9 +110,12 @@
               placeholder="Email Kasir"
               required
             >
+
           </label>
 
+
           <label>
+
             Password
 
             <input
@@ -107,7 +125,9 @@
               placeholder="Password"
               required
             >
+
           </label>
+
 
           <button
             type="submit"
@@ -115,6 +135,7 @@
           >
             Masuk
           </button>
+
 
           <button
             type="button"
@@ -124,6 +145,7 @@
             Lupa Password?
           </button>
 
+
           <div
             id="login-message"
             class="auth-message"
@@ -131,7 +153,10 @@
 
         </form>
 
-        <!-- FORGOT PASSWORD -->
+
+        <!-- =================================================
+             FORGOT PASSWORD
+             ================================================= -->
 
         <form
           id="forgot-form"
@@ -149,12 +174,15 @@
             </h2>
 
             <p>
-              Masukkan email Kasir untuk menerima link reset password.
+              Masukkan email Kasir untuk menerima link
+              reset password.
             </p>
 
           </div>
 
+
           <label>
+
             Email
 
             <input
@@ -164,7 +192,9 @@
               placeholder="Email Kasir"
               required
             >
+
           </label>
+
 
           <button
             type="submit"
@@ -172,6 +202,7 @@
           >
             Kirim Link Reset
           </button>
+
 
           <button
             type="button"
@@ -181,12 +212,88 @@
             Kembali ke Login
           </button>
 
+
           <div
             id="forgot-message"
             class="auth-message"
           ></div>
 
         </form>
+
+
+        <!-- =================================================
+             UPDATE / CREATE PASSWORD
+             ================================================= -->
+
+        <form
+          id="update-password-form"
+          class="auth-form hidden"
+        >
+
+          <div class="form-heading">
+
+            <span>
+              AKTIVASI AKUN KASIR
+            </span>
+
+            <h2>
+              Buat Password Baru
+            </h2>
+
+            <p>
+              Buat password untuk akun Kasir Anda.
+            </p>
+
+          </div>
+
+
+          <label>
+
+            Password Baru
+
+            <input
+              id="new-password"
+              type="password"
+              autocomplete="new-password"
+              placeholder="Minimal 6 karakter"
+              minlength="6"
+              required
+            >
+
+          </label>
+
+
+          <label>
+
+            Ulangi Password Baru
+
+            <input
+              id="confirm-password"
+              type="password"
+              autocomplete="new-password"
+              placeholder="Ulangi password"
+              minlength="6"
+              required
+            >
+
+          </label>
+
+
+          <button
+            type="submit"
+            class="btn-primary"
+          >
+            Simpan Password
+          </button>
+
+
+          <div
+            id="update-password-message"
+            class="auth-message"
+          ></div>
+
+        </form>
+
 
       </div>
 
@@ -202,6 +309,11 @@
       class="screen app-screen hidden"
     >
 
+
+      <!-- =================================================
+           TOPBAR
+           ================================================= -->
+
       <header class="topbar">
 
         <div class="topbar-brand">
@@ -212,6 +324,7 @@
           >
 
           <div>
+
             <strong>
               KASIR NAMPOL
             </strong>
@@ -219,15 +332,18 @@
             <span>
               SEBLAK NAMPOL
             </span>
+
           </div>
 
         </div>
+
 
         <div class="topbar-user">
 
           <span id="cashier-name">
             Kasir
           </span>
+
 
           <button
             type="button"
@@ -241,6 +357,10 @@
 
       </header>
 
+
+      <!-- =================================================
+           CONTENT
+           ================================================= -->
 
       <main
         id="cashier-content"
@@ -266,9 +386,14 @@
       </main>
 
 
+      <!-- =================================================
+           FOOTER
+           ================================================= -->
+
       <footer class="app-footer">
         SEBLAK NAMPOL • © 2026 • by Suwardi
       </footer>
+
 
     </section>
 
@@ -279,9 +404,17 @@
        SUPABASE
        ===================================================== -->
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
+
+
+  <!-- =====================================================
+       APP JS
+       ===================================================== -->
 
   <script src="./app.js"></script>
 
 </body>
+
 </html>
