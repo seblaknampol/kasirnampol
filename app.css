@@ -1,6 +1,49 @@
 /* =========================================================
-   KASIR NAMPOL
-   GLOBAL
+   SEBLAK NAMPOL — KASIR
+   GLOBAL CSS
+   ========================================================= */
+
+:root {
+  --red: #c8102e;
+  --red-dark: #a80d26;
+  --red-light: #fbe7eb;
+  --red-soft: #fff3f5;
+
+  --black: #111111;
+  --black-soft: #252525;
+
+  --white: #ffffff;
+  --gray-50: #fafafa;
+  --gray-100: #f3f3f3;
+  --gray-200: #e5e5e5;
+  --gray-300: #d2d2d2;
+  --gray-500: #777777;
+  --gray-700: #3d3d3d;
+
+  --success: #15803d;
+  --success-bg: #eaf7ef;
+
+  --warning: #b45309;
+  --warning-bg: #fff7e6;
+
+  --danger: #b91c1c;
+  --danger-bg: #fdecec;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  --shadow-sm:
+    0 2px 8px rgba(0, 0, 0, 0.06);
+
+  --shadow-md:
+    0 8px 24px rgba(0, 0, 0, 0.09);
+
+  --topbar-height: 68px;
+}
+
+/* =========================================================
+   RESET
    ========================================================= */
 
 * {
@@ -11,21 +54,33 @@ html,
 body {
   margin: 0;
   padding: 0;
+  width: 100%;
   min-height: 100%;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
   font-family:
     Arial,
     Helvetica,
     sans-serif;
-  background: #f5f5f5;
-  color: #171717;
-}
 
-body {
-  min-height: 100vh;
+  background:
+    #f5f5f5;
+
+  color: var(--black);
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 button,
-input {
+input,
+textarea,
+select {
   font: inherit;
 }
 
@@ -33,355 +88,1062 @@ button {
   cursor: pointer;
 }
 
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
 .hidden {
   display: none !important;
 }
-
 
 /* =========================================================
    AUTH SCREEN
    ========================================================= */
 
-.auth-screen {
+#auth-screen {
   min-height: 100vh;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   padding: 32px;
+
   background:
     linear-gradient(
       135deg,
-      #c8102e 0%,
-      #a80d26 55%,
-      #7f0a1d 100%
+      var(--red) 0%,
+      var(--red-dark) 48%,
+      #78091c 100%
     );
 }
 
+/* =========================================================
+   LOGIN CARD
+   ========================================================= */
+
 .auth-card {
-  width: min(460px, 100%);
-  background: #ffffff;
-  border-radius: 22px;
-  padding: 32px;
+  width: 100%;
+  max-width: 430px;
+
+  background: var(--white);
+
+  border-radius: 20px;
+
+  padding: 34px;
+
   box-shadow:
-    0 24px 60px
-    rgba(0, 0, 0, 0.25);
+    0 20px 55px rgba(0, 0, 0, 0.22);
 }
-
 
 /* =========================================================
-   BRAND
+   AUTH BRAND
    ========================================================= */
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 30px;
+.auth-brand {
+  text-align: center;
+
+  margin-bottom: 28px;
 }
 
-.brand-logo {
-  width: 72px;
-  height: 72px;
+.auth-brand img {
+  width: 82px;
+  height: 82px;
+
   object-fit: contain;
-  flex: 0 0 72px;
+
+  margin: 0 auto 14px;
 }
 
-.brand-text h1 {
+.auth-brand h1 {
   margin: 0;
-  color: #c8102e;
-  font-size: 22px;
-  font-weight: 900;
+
+  color: var(--red);
+
+  font-size: 27px;
+  font-weight: 800;
+
+  letter-spacing: -0.5px;
 }
 
-.brand-text p {
-  margin: 5px 0 0;
-  color: #666666;
-  font-size: 13px;
-}
+.auth-brand p {
+  margin: 6px 0 0;
 
+  color: var(--gray-500);
+
+  font-size: 14px;
+}
 
 /* =========================================================
-   FORM
+   AUTH FORM
    ========================================================= */
-
-.form-heading {
-  margin-bottom: 22px;
-}
-
-.form-heading span {
-  display: inline-block;
-  margin-bottom: 7px;
-  color: #c8102e;
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: 1px;
-}
-
-.form-heading h2 {
-  margin: 0;
-  font-size: 25px;
-  line-height: 1.2;
-}
-
-.form-heading p {
-  margin: 8px 0 0;
-  color: #666666;
-  font-size: 13px;
-  line-height: 1.5;
-}
 
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 17px;
 }
 
-.auth-form label {
+.auth-form h2 {
+  margin: 0 0 2px;
+
+  color: var(--black);
+
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.form-group {
   display: flex;
   flex-direction: column;
   gap: 7px;
-  color: #222222;
+}
+
+.form-group label {
+  color: var(--black-soft);
+
   font-size: 13px;
   font-weight: 700;
 }
 
-.auth-form input {
+.form-group input {
   width: 100%;
-  min-height: 48px;
-  padding: 0 14px;
-  border: 1px solid #d5d5d5;
-  border-radius: 10px;
+
+  height: 46px;
+
+  padding: 0 13px;
+
+  border:
+    1px solid var(--gray-300);
+
+  border-radius: 9px;
+
   outline: none;
-  background: #ffffff;
-  color: #171717;
+
+  background: var(--white);
+
+  color: var(--black);
+
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
-.auth-form input:focus {
-  border-color: #c8102e;
+.form-group input:focus {
+  border-color: var(--red);
+
   box-shadow:
     0 0 0 3px
     rgba(200, 16, 46, 0.12);
 }
 
-
 /* =========================================================
-   BUTTON
+   PRIMARY BUTTON
    ========================================================= */
 
 .btn-primary {
   width: 100%;
-  min-height: 50px;
+
+  min-height: 46px;
+
   border: 0;
-  border-radius: 10px;
-  background: #c8102e;
-  color: #ffffff;
+
+  border-radius: 9px;
+
+  background: var(--red);
+
+  color: var(--white);
+
+  font-size: 14px;
   font-weight: 800;
-  transition: 0.2s ease;
+
+  transition:
+    background 0.15s ease,
+    transform 0.1s ease;
 }
 
 .btn-primary:hover {
-  background: #a80d26;
+  background: var(--red-dark);
 }
 
-.btn-primary:disabled {
-  opacity: 0.6;
-  cursor: wait;
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+/* =========================================================
+   SECONDARY / TEXT BUTTON
+   ========================================================= */
+
+.btn-secondary {
+  min-height: 44px;
+
+  padding: 0 16px;
+
+  border:
+    1px solid var(--gray-300);
+
+  border-radius: 9px;
+
+  background: var(--white);
+
+  color: var(--black);
+
+  font-weight: 700;
+}
+
+.btn-secondary:hover {
+  border-color: var(--red);
+
+  color: var(--red);
+
+  background: var(--red-soft);
 }
 
 .btn-link {
+  padding: 0;
+
   border: 0;
+
   background: transparent;
-  color: #c8102e;
+
+  color: var(--red);
+
   font-size: 13px;
   font-weight: 700;
+
+  text-align: center;
 }
 
 .btn-link:hover {
   text-decoration: underline;
 }
 
-
 /* =========================================================
-   MESSAGE
+   AUTH MESSAGE
    ========================================================= */
 
 .auth-message {
-  min-height: 20px;
+  min-height: 18px;
+
+  margin: 0;
+
   font-size: 13px;
+
   line-height: 1.5;
+
+  text-align: center;
 }
 
 .auth-message.error {
-  color: #b00020;
+  color: var(--danger);
 }
 
 .auth-message.success {
-  color: #087f23;
+  color: var(--success);
 }
-
 
 /* =========================================================
-   APP SCREEN
+   MAIN APP
    ========================================================= */
 
-.app-screen {
+#app-screen {
   min-height: 100vh;
+
   display: flex;
   flex-direction: column;
-  background: #f3f3f3;
-}
 
+  background:
+    var(--gray-100);
+}
 
 /* =========================================================
    TOPBAR
    ========================================================= */
 
-.topbar {
-  min-height: 76px;
+.app-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+
+  min-height: var(--topbar-height);
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
-  padding: 12px 28px;
-  background: #c8102e;
-  color: #ffffff;
+
+  padding:
+    0 24px;
+
+  background: var(--white);
+
+  border-bottom:
+    1px solid var(--gray-200);
+
   box-shadow:
-    0 4px 14px
-    rgba(0, 0, 0, 0.16);
+    0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.topbar-brand {
+/* =========================================================
+   TOPBAR BRAND
+   ========================================================= */
+
+.app-brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+
+  gap: 11px;
+
+  min-width: 0;
 }
 
-.topbar-brand img {
-  width: 48px;
-  height: 48px;
+.app-brand img {
+  width: 42px;
+  height: 42px;
+
   object-fit: contain;
+
+  flex-shrink: 0;
 }
 
-.topbar-brand strong {
-  display: block;
-  font-size: 17px;
+.app-brand-text {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+.app-brand-name {
+  margin: 0;
+
+  color: var(--red);
+
+  font-size: 18px;
   font-weight: 900;
+
+  line-height: 1.15;
 }
 
-.topbar-brand span {
-  display: block;
+.app-brand-role {
   margin-top: 3px;
+
+  color: var(--gray-500);
+
   font-size: 11px;
-  opacity: 0.85;
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.5px;
 }
 
-.topbar-user {
+/* =========================================================
+   TOPBAR RIGHT
+   ========================================================= */
+
+.app-topbar-right {
   display: flex;
   align-items: center;
+
   gap: 15px;
-  font-size: 13px;
-  font-weight: 700;
 }
 
-.btn-logout {
+.cashier-info {
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-end;
+
+  min-width: 0;
+}
+
+.cashier-label {
+  color: var(--gray-500);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+}
+
+#cashier-name {
+  max-width: 220px;
+
+  overflow: hidden;
+
+  color: var(--black);
+
+  font-size: 14px;
+  font-weight: 800;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+#logout-btn {
   min-height: 40px;
-  padding: 0 16px;
-  border: 1px solid
-    rgba(255, 255, 255, 0.5);
-  border-radius: 9px;
-  background: #ffffff;
-  color: #c8102e;
+
+  padding: 0 15px;
+
+  border:
+    1px solid var(--red);
+
+  border-radius: 8px;
+
+  background: var(--white);
+
+  color: var(--red);
+
+  font-size: 13px;
   font-weight: 800;
 }
 
+#logout-btn:hover {
+  background: var(--red);
+
+  color: var(--white);
+}
 
 /* =========================================================
-   CONTENT
+   MAIN CONTENT
    ========================================================= */
 
-.cashier-content {
+.app-main {
+  width: 100%;
+
   flex: 1;
+
   padding: 28px;
 }
 
-.welcome-panel {
-  padding: 30px;
-  border-radius: 18px;
-  background: #ffffff;
-  border-left: 7px solid #c8102e;
-  box-shadow:
-    0 8px 24px
-    rgba(0, 0, 0, 0.07);
+.app-container {
+  width: 100%;
+
+  max-width: 1400px;
+
+  margin: 0 auto;
 }
 
-.panel-kicker {
-  color: #c8102e;
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: 1px;
+/* =========================================================
+   WELCOME / DASHBOARD PLACEHOLDER
+   ========================================================= */
+
+.app-welcome {
+  min-height: 320px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px;
+
+  border:
+    1px solid var(--gray-200);
+
+  border-radius: var(--radius-lg);
+
+  background: var(--white);
+
+  box-shadow: var(--shadow-sm);
+
+  text-align: center;
 }
 
-.welcome-panel h1 {
-  margin: 8px 0 5px;
-  font-size: 30px;
+.app-welcome-inner {
+  width: 100%;
+  max-width: 600px;
 }
 
-.welcome-panel p {
+.app-welcome-logo {
+  width: 86px;
+  height: 86px;
+
+  object-fit: contain;
+
+  margin: 0 auto 18px;
+}
+
+.app-welcome h1 {
   margin: 0;
-  color: #666666;
+
+  color: var(--red);
+
+  font-size: 30px;
+  font-weight: 900;
 }
 
+.app-welcome p {
+  margin: 10px 0 0;
+
+  color: var(--gray-500);
+
+  font-size: 15px;
+
+  line-height: 1.6;
+}
 
 /* =========================================================
    FOOTER
    ========================================================= */
 
 .app-footer {
-  padding: 14px 28px;
-  background: #171717;
-  color: #ffffff;
-  text-align: center;
+  padding:
+    18px 24px;
+
+  border-top:
+    1px solid var(--gray-200);
+
+  background: var(--white);
+
+  color: var(--gray-500);
+
   font-size: 12px;
+
+  text-align: center;
 }
 
-
 /* =========================================================
-   RESPONSIVE
+   GENERIC CARD
    ========================================================= */
 
-@media (max-width: 700px) {
+.card {
+  background: var(--white);
 
-  .auth-screen {
+  border:
+    1px solid var(--gray-200);
+
+  border-radius: var(--radius-md);
+
+  box-shadow: var(--shadow-sm);
+}
+
+/* =========================================================
+   GENERIC PAGE HEADER
+   ========================================================= */
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  margin: 0;
+
+  color: var(--black);
+
+  font-size: 26px;
+  font-weight: 900;
+}
+
+.page-header p {
+  margin: 7px 0 0;
+
+  color: var(--gray-500);
+
+  font-size: 14px;
+}
+
+/* =========================================================
+   GENERIC TOOLBAR
+   ========================================================= */
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  padding: 16px;
+
+  margin-bottom: 18px;
+
+  border:
+    1px solid var(--gray-200);
+
+  border-radius: var(--radius-md);
+
+  background: var(--white);
+
+  box-shadow: var(--shadow-sm);
+}
+
+.toolbar-left,
+.toolbar-right {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+}
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.table-wrapper {
+  width: 100%;
+
+  overflow-x: auto;
+
+  border:
+    1px solid var(--gray-200);
+
+  border-radius: var(--radius-md);
+
+  background: var(--white);
+
+  box-shadow: var(--shadow-sm);
+}
+
+table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  min-width: 700px;
+}
+
+thead {
+  background:
+    var(--red);
+}
+
+th {
+  padding: 13px 15px;
+
+  color: var(--white);
+
+  font-size: 12px;
+  font-weight: 800;
+
+  text-align: left;
+
+  white-space: nowrap;
+}
+
+td {
+  padding: 13px 15px;
+
+  border-bottom:
+    1px solid var(--gray-200);
+
+  color: var(--black-soft);
+
+  font-size: 13px;
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+tbody tr:hover {
+  background: var(--red-soft);
+}
+
+/* =========================================================
+   BADGES
+   ========================================================= */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 26px;
+
+  padding: 0 9px;
+
+  border-radius: 999px;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  white-space: nowrap;
+}
+
+.badge-success {
+  background: var(--success-bg);
+
+  color: var(--success);
+}
+
+.badge-warning {
+  background: var(--warning-bg);
+
+  color: var(--warning);
+}
+
+.badge-danger {
+  background: var(--danger-bg);
+
+  color: var(--danger);
+}
+
+.badge-neutral {
+  background: var(--gray-100);
+
+  color: var(--gray-700);
+}
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+.modal-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background:
+    rgba(0, 0, 0, 0.55);
+}
+
+.modal {
+  width: 100%;
+
+  max-width: 560px;
+
+  max-height:
+    calc(100vh - 40px);
+
+  overflow-y: auto;
+
+  border-radius: var(--radius-lg);
+
+  background: var(--white);
+
+  box-shadow:
+    0 24px 70px
+    rgba(0, 0, 0, 0.25);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding: 18px 20px;
+
+  border-bottom:
+    1px solid var(--gray-200);
+}
+
+.modal-header h2 {
+  margin: 0;
+
+  color: var(--black);
+
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.modal-close {
+  width: 34px;
+  height: 34px;
+
+  border: 0;
+
+  border-radius: 8px;
+
+  background: var(--gray-100);
+
+  color: var(--black);
+
+  font-size: 20px;
+}
+
+.modal-close:hover {
+  background: var(--red-light);
+
+  color: var(--red);
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  padding: 16px 20px;
+
+  border-top:
+    1px solid var(--gray-200);
+}
+
+/* =========================================================
+   FORM GENERIC
+   ========================================================= */
+
+.form-row {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 15px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.form-field label {
+  color: var(--black-soft);
+
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+
+  padding: 11px 12px;
+
+  border:
+    1px solid var(--gray-300);
+
+  border-radius: 8px;
+
+  outline: none;
+
+  background: var(--white);
+
+  color: var(--black);
+}
+
+.form-field input,
+.form-field select {
+  min-height: 44px;
+}
+
+.form-field textarea {
+  min-height: 100px;
+
+  resize: vertical;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: var(--red);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(200, 16, 46, 0.1);
+}
+
+/* =========================================================
+   RESPONSIVE — TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .app-topbar {
+    padding:
+      0 18px;
+  }
+
+  .app-main {
+    padding: 20px;
+  }
+
+  .page-header {
+    flex-direction: column;
+  }
+
+  .toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .toolbar-left,
+  .toolbar-right {
+    width: 100%;
+  }
+
+}
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+  #auth-screen {
     padding: 18px;
   }
 
   .auth-card {
-    padding: 24px 20px;
-    border-radius: 18px;
+    padding: 25px 20px;
+
+    border-radius: 16px;
   }
 
-  .topbar {
-    padding: 10px 16px;
+  .auth-brand img {
+    width: 70px;
+    height: 70px;
   }
 
-  .topbar-user {
+  .auth-brand h1 {
+    font-size: 23px;
+  }
+
+  .app-topbar {
+    min-height: auto;
+
+    padding:
+      12px 15px;
+
+    gap: 12px;
+  }
+
+  .app-brand img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .app-brand-name {
+    font-size: 15px;
+  }
+
+  .app-brand-role {
+    font-size: 9px;
+  }
+
+  .app-topbar-right {
     gap: 8px;
   }
 
-  .topbar-user span {
+  .cashier-info {
     display: none;
   }
 
-  .cashier-content {
-    padding: 16px;
+  #logout-btn {
+    min-height: 36px;
+
+    padding:
+      0 11px;
+
+    font-size: 11px;
   }
 
-  .welcome-panel {
-    padding: 22px;
+  .app-main {
+    padding: 15px;
   }
 
-  .welcome-panel h1 {
+  .app-welcome {
+    min-height: 280px;
+
+    padding: 25px 18px;
+  }
+
+  .app-welcome h1 {
     font-size: 24px;
   }
 
+  .app-footer {
+    padding:
+      15px 12px;
+
+    font-size: 11px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-overlay {
+    padding: 10px;
+  }
+
+  .modal {
+    max-height:
+      calc(100vh - 20px);
+
+    border-radius: 14px;
+  }
+
+  .modal-footer {
+    flex-direction: column;
+  }
+
+  .modal-footer button {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   LANDSCAPE KASIR
+   ========================================================= */
+
+@media (orientation: landscape) and (min-width: 800px) {
+
+  .app-main {
+    padding:
+      24px 28px;
+  }
+
+  .app-welcome {
+    min-height: 360px;
+  }
+
+}
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--gray-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gray-300);
+
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--red);
 }
