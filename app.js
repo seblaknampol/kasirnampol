@@ -13,6 +13,10 @@ const SUPABASE_ANON_KEY =
 const KASIR_URL =
   'https://seblaknampol.github.io/kasirnampol/';
 
+// Simpan URL recovery sebelum Supabase memproses URL.
+const initialRecoveryHash = window.location.hash;
+const initialRecoverySearch = window.location.search;
+
 const supabaseClient =
   window.supabase.createClient(
     SUPABASE_URL,
@@ -718,8 +722,29 @@ logoutBtn?.addEventListener(
    PASSWORD RECOVERY / INVITATION
    ========================================================= */
 
+const recoveryHashParams = new URLSearchParams(
+  initialRecoveryHash.replace(/^#/, '')
+);
+const recoveryQueryParams = new URLSearchParams(
+  initialRecoverySearch
+);
+
+// Deteksi tautan aktivasi akun dan pemulihan password.
+const hashAuthType = recoveryHashParams.get('type');
+const queryAuthType = recoveryQueryParams.get('type');
+
+const passwordSetupTypes = [
+  'recovery',
+  'signup',
+  'invite',
+  'magiclink',
+  'email'
+];
+
 let recoveryDetected =
-  false;
+  passwordSetupTypes.includes(hashAuthType) ||
+  passwordSetupTypes.includes(queryAuthType) ||
+  Boolean(recoveryQueryParams.get('code'));
 
 supabaseClient.auth.onAuthStateChange(
   async (event, session) => {
@@ -822,6 +847,12 @@ async function checkSession() {
   const session =
     data?.session;
 
+  if (recoveryDetected) {
+    showAuth();
+    showUpdatePassword();
+    return;
+  }
+
   if (!session?.user) {
 
     showAuth();
@@ -831,14 +862,6 @@ async function checkSession() {
     return;
   }
 
-  /*
-   * Jika event recovery sudah
-   * terdeteksi, jangan masuk
-   * dashboard.
-   */
-  if (recoveryDetected) {
-    return;
-  }
 
   const valid =
     await loadCashierProfile(
